@@ -41,6 +41,4 @@ in
 {
   inherit opam2nix resolve selection;
   inherit (selection) ocaml_nix;
-  #inherit (selection) ocaml_nix;
-  #piaf lambda-runtime;
 }
