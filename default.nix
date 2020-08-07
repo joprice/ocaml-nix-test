@@ -12,7 +12,7 @@ let
     owner = "savonet";
     repo = "ocaml-ssl";
     rev = "fbffa9b";
-    sha256 = "1zf6i4z5aq45in430pagp8cz2q65jdhsdpsgpcdysjm4jlfsswr1";
+    sha256 = "1pp9hig7kkzhr3n1rkc177mnahrijx6sbq59xjr8bnbfsmn1l2ay";
   };
   httpaf = fetchFromGitHub {
     owner = "anmonteiro";
@@ -33,23 +33,14 @@ let
     sha256 = "1m0aph410c4c2j9516gy5r2waj85v3181dps854vv1820zr6si0b";
   };
   opam2nix = import ./opam2nix.nix { };
-  #args2 = {
-  #  inherit (ocaml-ng.ocamlPackages_4_10) ocaml;
-  #  selection = ./opam-selection.nix;
-  #  src = {
-  #    inherit piaf;
-  #    inherit lambda-runtime;
-  #    #inherit lambda-runtime;
-  #  };
-  #};
   args = {
     inherit (ocaml-ng.ocamlPackages_4_10) ocaml;
     selection = ./opam-selection.nix;
     src = {
+      inherit ssl;
       inherit lambda-runtime;
       inherit piaf;
       inherit httpaf;
-      inherit ssl;
       httpaf-lwt-unix = httpaf;
       httpaf-lwt = httpaf;
       ocaml_nix = ./.;
@@ -59,18 +50,16 @@ let
     opam2nix.resolve args [
       "${lambda-runtime}/lambda-runtime.opam"
       "${piaf}/piaf.opam"
+      "${ssl}/ssl.opam"
       "${httpaf}/httpaf.opam"
       "${httpaf}/httpaf-lwt.opam"
       "${httpaf}/httpaf-lwt-unix.opam"
       "ocaml_nix.opam"
     ];
   selection = opam2nix.build args;
-  #selection2 = opam2nix.build args2;
 in
 {
   inherit opam2nix resolve;
   inherit selection;
   inherit (selection) ocaml_nix;
-  # selection selection2;
-  #inherit (selection) ocaml_nix piaf lambda-runtime;
 }

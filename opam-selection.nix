@@ -1583,20 +1583,11 @@ in
         base-unix = selection.base-unix;
         conf-libssl = selection.conf-libssl;
         dune = selection.dune;
-        dune-configurator = selection.dune-configurator;
         ocaml = selection.ocaml;
       };
-      opamSrc = repoPath (repos.opam-repository.src) 
-      {
-        hash = "sha256:1g7a3znmp6w8n59qfyrmaaww7460z7cgby1syl60phs3wfk8096x";
-        package = "packages/ssl/ssl.0.5.9";
-      };
+      opamSrc = "ssl.opam";
       pname = "ssl";
-      src = pkgs.fetchurl 
-      {
-        sha256 = "1sk166b2rbdvrvbzc5j4nigh68nh1b04p3pbzk0wjp5gz6m6cg8z";
-        url = "https://github.com/savonet/ocaml-ssl/archive/0.5.9.tar.gz";
-      };
+      src = self.directSrc "ssl";
       version = "0.5.9";
     };
     stdio = 
