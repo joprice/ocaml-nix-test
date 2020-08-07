@@ -32,9 +32,7 @@ let
   };
   resolve =
     opam2nix.resolve args [
-      "--define"
       "${lambda-runtime}/lambda-runtime.opam"
-      "--define"
       "${piaf}/piaf.opam"
       "ocaml_nix.opam"
     ];
