@@ -730,18 +730,25 @@ in
         ocaml = selection.ocaml;
         result = selection.result;
       };
-      opamSrc = repoPath (repos.opam-repository.src) 
-      {
-        hash = "sha256:1rq37xcd0h0yf0jmi4yb4h7jawdf8xdbxqpv8jq43iax23g17pcw";
-        package = "packages/httpaf/httpaf.0.6.6";
-      };
+      opamSrc = "httpaf.opam";
       pname = "httpaf";
-      src = pkgs.fetchurl 
+      src = self.directSrc "httpaf";
+      version = "development";
+    };
+    httpaf-lwt = 
+    {
+      opamInputs = 
       {
-        sha256 = "19zhgdlghsy7b4rc00qrwpwb9p5jv2j8162s28pc7pfgznmy200g";
-        url = "https://github.com/inhabitedtype/httpaf/archive/0.6.6.tar.gz";
+        dune = selection.dune;
+        gluten-lwt = selection.gluten-lwt;
+        httpaf = selection.httpaf;
+        lwt = selection.lwt;
+        ocaml = selection.ocaml;
       };
-      version = "0.6.6";
+      opamSrc = "httpaf-lwt.opam";
+      pname = "httpaf-lwt";
+      src = self.directSrc "httpaf-lwt";
+      version = "development";
     };
     httpaf-lwt-unix = 
     {
@@ -749,22 +756,16 @@ in
       {
         dune = selection.dune;
         faraday-lwt-unix = selection.faraday-lwt-unix;
+        gluten-lwt-unix = selection.gluten-lwt-unix;
         httpaf = selection.httpaf;
+        httpaf-lwt = selection.httpaf-lwt;
         lwt = selection.lwt;
         ocaml = selection.ocaml;
       };
-      opamSrc = repoPath (repos.opam-repository.src) 
-      {
-        hash = "sha256:0vaq09fb9axhjw0f3k0ssnj3kdxagqf9ywx4q786qx9yhcd5cqxv";
-        package = "packages/httpaf-lwt-unix/httpaf-lwt-unix.0.6.6";
-      };
+      opamSrc = "httpaf-lwt-unix.opam";
       pname = "httpaf-lwt-unix";
-      src = pkgs.fetchurl 
-      {
-        sha256 = "19zhgdlghsy7b4rc00qrwpwb9p5jv2j8162s28pc7pfgznmy200g";
-        url = "https://github.com/inhabitedtype/httpaf/archive/0.6.6.tar.gz";
-      };
-      version = "0.6.6";
+      src = self.directSrc "httpaf-lwt-unix";
+      version = "development";
     };
     lambda-runtime = 
     {
@@ -1180,6 +1181,7 @@ in
     {
       opamInputs = 
       {
+        lambda-runtime = selection.lambda-runtime;
         ocamlformat = selection.ocamlformat;
         utop = selection.utop;
       };
