@@ -1,0 +1,9 @@
+.merlin
+_build
+_release
+.DS_Store
+*.install
+*.sw*
+_opam/
+result
+.direnv

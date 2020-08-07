@@ -1,0 +1,5 @@
+(env
+  (docker (flags (-ccopt -static)))
+  (_ (flags (:standard -w @A-42-44-48-45))
+))
+
