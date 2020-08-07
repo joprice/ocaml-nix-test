@@ -30,14 +30,19 @@ let
       ocaml_nix = ./.;
     };
   };
-  resolve = opam2nix.resolve args [
-    "${lambda-runtime}/lambda-runtime.opam"
-    "${piaf}/piaf.opam"
-    "ocaml_nix.opam"
-  ];
-  opam-selection = opam2nix.build args;
+  resolve =
+    opam2nix.resolve args [
+      "--define"
+      "${lambda-runtime}/lambda-runtime.opam"
+      "--define"
+      "${piaf}/piaf.opam"
+      "ocaml_nix.opam"
+    ];
+  selection = opam2nix.build args;
 in
 {
-  inherit piaf lambda-runtime opam2nix resolve;
-  inherit (opam-selection) ocaml_nix;
+  inherit opam2nix resolve selection;
+  inherit (selection) ocaml_nix;
+  #inherit (selection) ocaml_nix;
+  #piaf lambda-runtime;
 }
