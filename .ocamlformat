@@ -1,0 +1,7 @@
+align-cases = true
+align-constructors-decl = true
+align-variants-decl = true
+break-cases = toplevel
+# put @@ and |> on newlines
+break-infix = fit-or-vertical
+type-decl = sparse
