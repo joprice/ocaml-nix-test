@@ -1,3 +1,6 @@
+all:
+	dune build
+
 resolve:
 	nix-shell -A resolve ./default.nix
 
