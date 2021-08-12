@@ -7,6 +7,3 @@ depends: [
 build: [
   ["dune" "build" "-p" "ocaml_nix"]
 ]
-pin-depends: [
-  [ "lambda-runtime" "git+https://github.com/anmonteiro/aws-lambda-ocaml-runtime.git" ]
-]
