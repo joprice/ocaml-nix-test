@@ -9,12 +9,22 @@ function sigint_handler() {
   exit 1
 }
 
-trap sigint_handler SIGINT
+trap sigint_handler SIGINT SIGTERM
 
-while true; do
+pid=""
+
+function run() {
   dune build
   $cmd &
-  fswatch -r -1 $source_dirs
+  pid=$!
+}
+
+function restart() {
   printf "\nRestarting server.exe due to filesystem change\n"
-  kill "$(jobs -pr)"
-done
+  echo "$pid"
+  kill "$pid"
+  run
+}
+
+run
+fswatch -ot -r $source_dirs | (while read; do restart; done)
