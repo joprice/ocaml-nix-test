@@ -482,6 +482,30 @@ in
       };
       version = "6.0.1";
     };
+    ctypes = 
+    {
+      opamInputs = 
+      {
+        bigarray-compat = selection.bigarray-compat;
+        ctypes-foreign = selection.ctypes-foreign or null;
+        integers = selection.integers;
+        mirage-xen = selection.mirage-xen or null;
+        ocaml = selection.ocaml;
+        ocamlfind = selection.ocamlfind;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:0cwxwp4bj0yyyg8pwd8v8v6x0gvjniwih922q6cglpc04n9w98py";
+        package = "packages/ctypes/ctypes.0.19.1";
+      };
+      pname = "ctypes";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "05q6xrl09g515njfx3cdb497460jy6x60fjbz8iz9ajg7x1y591f";
+        url = "https://github.com/ocamllabs/ocaml-ctypes/archive/0.19.1.tar.gz";
+      };
+      version = "0.19.1";
+    };
     digestif = 
     {
       opamInputs = 
@@ -578,6 +602,30 @@ in
         url = "https://github.com/aantron/dream/releases/download/1.0.0-alpha2/dream-1.0.0-alpha2.tar.gz";
       };
       version = "1.0.0-alpha2";
+    };
+    dream-serve = 
+    {
+      opamInputs = 
+      {
+        dream = selection.dream;
+        dune = selection.dune;
+        lambdasoup = selection.lambdasoup;
+        luv = selection.luv;
+        lwt = selection.lwt;
+        lwt_ppx = selection.lwt_ppx;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:0mcyrhkzgjapy4zq09szwcw3x7aplw709ys438xlndr2xp9sfl0x";
+        package = "packages/dream-serve/dream-serve.1.0.0";
+      };
+      pname = "dream-serve";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "0sqmy3jjy00laxh1skq69i7mn2lg14sa2ilap8yvjpz2bhgc7cvp";
+        url = "https://github.com/aantron/dream-serve/archive/refs/tags/1.0.0.tar.gz";
+      };
+      version = "1.0.0";
     };
     dune = 
     {
@@ -1040,6 +1088,26 @@ in
       };
       version = "0.8.1";
     };
+    integers = 
+    {
+      opamInputs = 
+      {
+        dune = selection.dune;
+        ocaml = selection.ocaml;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:0bynxqx8waa5pbvkkz2glbmwsbfsnzvkd519z797774a0m9k4nh8";
+        package = "packages/integers/integers.0.5.0";
+      };
+      pname = "integers";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "1wm1pxl5bk7r8g9qwc89cz5awdy6rpnyvnivhzc3ml32bmw6y4dh";
+        url = "https://github.com/ocamllabs/ocaml-integers/archive/0.5.0.tar.gz";
+      };
+      version = "0.5.0";
+    };
     ipaddr = 
     {
       opamInputs = 
@@ -1139,6 +1207,27 @@ in
       };
       version = "3.1.0";
     };
+    lambdasoup = 
+    {
+      opamInputs = 
+      {
+        dune = selection.dune;
+        markup = selection.markup;
+        ocaml = selection.ocaml;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:1hqfkvhr5n4lgzgg7wgpibkvad1pa87ca1rkslgwylfy9aj08x6l";
+        package = "packages/lambdasoup/lambdasoup.0.7.2";
+      };
+      pname = "lambdasoup";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "1hj3dbnzm4vfzd0k7hgnlp2cxpbd9f5lbd2374bpfdzspxcl920h";
+        url = "https://github.com/aantron/lambdasoup/archive/0.7.2.tar.gz";
+      };
+      version = "0.7.2";
+    };
     logs = 
     {
       opamInputs = 
@@ -1165,6 +1254,29 @@ in
         url = "https://erratique.ch/software/logs/releases/logs-0.7.0.tbz";
       };
       version = "0.7.0";
+    };
+    luv = 
+    {
+      opamInputs = 
+      {
+        base-unix = selection.base-unix;
+        ctypes = selection.ctypes;
+        dune = selection.dune;
+        ocaml = selection.ocaml;
+        result = selection.result;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:05isqqv6p9sxhdknbsv42jq5p76wsvk4biwa0sjc5rlc06jx6lw9";
+        package = "packages/luv/luv.0.5.10";
+      };
+      pname = "luv";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "0zygir01d6vglfs4b3klnbg90glvyl9agq5xnzn8hmsb6d8z0jqp";
+        url = "https://github.com/aantron/luv/releases/download/0.5.10/luv-0.5.10.tar.gz";
+      };
+      version = "0.5.10";
     };
     lwt = 
     {
@@ -1324,6 +1436,28 @@ in
         url = "https://github.com/mirage/ocaml-magic-mime/releases/download/v1.2.0/magic-mime-v1.2.0.tbz";
       };
       version = "1.2.0";
+    };
+    markup = 
+    {
+      opamInputs = 
+      {
+        dune = selection.dune;
+        ocaml = selection.ocaml;
+        uchar = selection.uchar;
+        uutf = selection.uutf;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:02nm8nr250mjnapf5j0d3gnqah0d9zmk4wm61hxg06l0yli881a3";
+        package = "packages/markup/markup.1.0.2";
+      };
+      pname = "markup";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "1d6d95mj6m5jv4x9l4hv8qszy99f95qn7rcxndjf4pjmfv4sdix6";
+        url = "https://github.com/aantron/markup.ml/archive/1.0.2.tar.gz";
+      };
+      version = "1.0.2";
     };
     menhir = 
     {
@@ -1716,6 +1850,7 @@ in
       opamInputs = 
       {
         dream = selection.dream;
+        dream-serve = selection.dream-serve;
         lambda-runtime = selection.lambda-runtime;
         ocamlformat = selection.ocamlformat;
         utop = selection.utop;

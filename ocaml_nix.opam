@@ -4,6 +4,7 @@ depends: [
   "utop" {build}
   "dream"
   "lambda-runtime"
+  "dream-serve"
 ]
 build: [
   ["dune" "build" "-p" "ocaml_nix"]
