@@ -1,5 +1,10 @@
 open Lwt.Syntax
 
+type t = {
+  x : int32;
+  y : int32;
+}
+
 let () =
   Dream.run
   @@ Dream.logger

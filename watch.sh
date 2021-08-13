@@ -3,15 +3,14 @@
 source_dirs="lib bin"
 args=${*:-"bin/main.exe"}
 cmd="dune exec ${args}"
+pid=""
 
 function sigint_handler() {
-  kill "$(jobs -pr)"
+  kill "$pid"
   exit 1
 }
 
 trap sigint_handler SIGINT SIGTERM
-
-pid=""
 
 function run() {
   dune build
@@ -21,7 +20,6 @@ function run() {
 
 function restart() {
   printf "\nRestarting server.exe due to filesystem change\n"
-  echo "$pid"
   kill "$pid"
   run
 }
