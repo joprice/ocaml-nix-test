@@ -60,6 +60,8 @@ let () =
   @@ Dream_encoding.compress
   @@ Dream_livereload.inject_script ()
   @@ counter
+  (* @@ Dream.memory_sessions *)
+  @@ Dream.cookie_sessions
   @@ Dream.router
        [
          Dream.get "/slow" (fun _ ->
@@ -75,8 +77,23 @@ let () =
              Dream.response
                ~headers:[ ("Content-Type", "application/octet-stream") ]
                body);
-         Dream.get "/user/:user" (fun req ->
-             Dream.respond @@ Dream.param "user" req);
+         (* returns all keys stored in the session for the current user *)
+         Dream.get "sessions" (fun req ->
+             let sessions = Dream.all_session_values req in
+             let sessions =
+               sessions
+               |> ListLabels.map ~f:(fun (a, b) -> Printf.sprintf "%s:%s" a b)
+             in
+             sessions |> String.concat "," |> Dream.respond);
+         Dream.get "/user" (fun req ->
+             let user =
+               Dream.session "user" req |> Option.value ~default:"not logged in"
+             in
+             Dream.respond user);
+         Dream.post "/user/:user" (fun req ->
+             let username = Dream.param "user" req in
+             let* () = Dream.put_session "user" username req in
+             Dream.html "logged in");
          Dream_livereload.route ();
          Dream.get "/bad" (fun _ -> Dream.empty `Bad_Request);
        ]
