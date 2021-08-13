@@ -3,7 +3,9 @@ depends: [
   "ocamlformat" {build}
   "utop" {build}
   "dream"
-  "lambda-runtime"
+  "dream-cli"
+  "dream-encoding"
+  "dream-livereload"
   "dream-serve"
 ]
 build: [
