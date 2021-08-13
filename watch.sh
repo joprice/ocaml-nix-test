@@ -13,7 +13,7 @@ function sigint_handler() {
 trap sigint_handler SIGINT SIGTERM
 
 function run() {
-  dune build
+  #dune build
   $cmd &
   pid=$!
 }
