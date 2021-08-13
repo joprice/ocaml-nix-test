@@ -1,28 +1,32 @@
 #!/usr/bin/env bash
 
+set -x
+
 source_dirs="lib bin"
 args=${*:-"bin/main.exe"}
 cmd="dune exec ${args}"
-pid=""
+pidfile="pidfile"
 
-function sigint_handler() {
+sig_handler() {
+  pid=$(<pidfile)
   kill "$pid"
-  exit 1
+  exit 0
 }
 
-trap sigint_handler SIGINT SIGTERM
-
-function run() {
-  #dune build
+run() {
   $cmd &
-  pid=$!
+  echo $! > $pidfile
 }
 
-function restart() {
+restart() {
   printf "\nRestarting server.exe due to filesystem change\n"
-  kill "$pid"
+  child=$(<$pidfile)
+  kill "$child"
   run
 }
 
+trap sig_handler SIGINT SIGTERM SIGEXIT
+
 run
-fswatch -ot -r $source_dirs | (while read; do restart; done)
+#fswatch -0 -x -or $source_dirs)
+fswatch -or $source_dirs | (while read; do restart; done)
