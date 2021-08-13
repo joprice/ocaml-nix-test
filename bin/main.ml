@@ -17,6 +17,8 @@ let () =
              Dream.html "world");
          Dream.get "/fast" (fun _ -> Dream.html "world a");
          Dream.get "/fail" (fun _ -> Lwt.fail Not_found);
+         Dream.get "/user/:user" (fun req ->
+             Dream.respond @@ Dream.param "user" req);
          Dream_livereload.route ();
        ]
   @@ Dream.not_found
