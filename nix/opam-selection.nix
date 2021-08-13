@@ -13,8 +13,8 @@ let
         {
           owner = "ocaml";
           repo = "opam-repository";
-          rev = "12141eb02b97b460cb58080ec6f6eb3041f18aa2";
-          sha256 = "0cddkzlqqrq92chb5s7g8b4yk4wfw6qcj2dx5zxindck9br7sbsc";
+          rev = "402d9ad348fea371f3513c076a7e234816003926";
+          sha256 = "1fh821hbb8sl7ji96gk2hyk51n0j1494c3mz9mkdscvcpgv8rz48";
         };
         src = (pkgs.fetchFromGitHub) fetch;
       };
@@ -959,6 +959,28 @@ in
       };
       version = "0.7.3";
     };
+    gen = 
+    {
+      opamInputs = 
+      {
+        base-bytes = selection.base-bytes;
+        dune = selection.dune;
+        dune-configurator = selection.dune-configurator;
+        ocaml = selection.ocaml;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:0h62m8pf7jdvl6acdw3pnmb9j37z0ph3acsm752kn6xvznijssd6";
+        package = "packages/gen/gen.0.5.3";
+      };
+      pname = "gen";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "1jylp0i6952lj3cvmy2c4a5my5cbf39kynxgbh4xg3k7dp7540qn";
+        url = "https://github.com/c-cube/gen/archive/0.5.3.tar.gz";
+      };
+      version = "0.5.3";
+    };
     gen_js_api = 
     {
       opamInputs = 
@@ -1727,6 +1749,8 @@ in
         dream-livereload = selection.dream-livereload;
         dream-serve = selection.dream-serve;
         ocamlformat = selection.ocamlformat;
+        ppx_string_interpolation = selection.ppx_string_interpolation;
+        ppx_yojson_conv = selection.ppx_yojson_conv;
         utop = selection.utop;
       };
       opamSrc = "ocaml_nix.opam";
@@ -1852,6 +1876,26 @@ in
       };
       version = "1.1";
     };
+    octavius = 
+    {
+      opamInputs = 
+      {
+        dune = selection.dune;
+        ocaml = selection.ocaml;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:0bagilkanfjyi56hrk9dw43xs6zry9p8n3l55r3d58v5hz2xsbwl";
+        package = "packages/octavius/octavius.1.2.2";
+      };
+      pname = "octavius";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "1bg0fcm7haqxvx5wx2cci0mbbq0gf1vw9fa4kkd6jsriw1611jga";
+        url = "https://github.com/ocaml-doc/octavius/archive/v1.2.2.tar.gz";
+      };
+      version = "1.2.2";
+    };
     odoc-parser = 
     {
       opamInputs = 
@@ -1946,6 +1990,51 @@ in
       };
       version = "1.2.1";
     };
+    ppx_js_style = 
+    {
+      opamInputs = 
+      {
+        base = selection.base;
+        dune = selection.dune;
+        ocaml = selection.ocaml;
+        octavius = selection.octavius;
+        ppxlib = selection.ppxlib;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:05bc07ghvfd4d85inf1qvpqxphvcg7mgf8fn9ycib6fdmxdkkamq";
+        package = "packages/ppx_js_style/ppx_js_style.v0.14.1";
+      };
+      pname = "ppx_js_style";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "1nq4rj659f34dc28pj7ir2szqbpky4nzs9qfw0am6sf36jwispiw";
+        url = "https://github.com/janestreet/ppx_js_style/archive/refs/tags/v0.14.1.tar.gz";
+      };
+      version = "v0.14.1";
+    };
+    ppx_string_interpolation = 
+    {
+      opamInputs = 
+      {
+        dune = selection.dune;
+        ocaml = selection.ocaml;
+        ppxlib = selection.ppxlib;
+        sedlex = selection.sedlex;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:1w0afx2gzdfs3y9irl6nj07cmv8bz3kdj66vsr4lrpgz2sxgsnnl";
+        package = "packages/ppx_string_interpolation/ppx_string_interpolation.1.0.0";
+      };
+      pname = "ppx_string_interpolation";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "02lcjmabby7w9fn0wq65137ir521yzrvzy35vd4kmrpa704rxb3i";
+        url = "https://github.com/bloomberg/ppx_string_interpolation/archive/1.0.0.tar.gz";
+      };
+      version = "1.0.0";
+    };
     ppx_tools_versioned = 
     {
       opamInputs = 
@@ -1966,6 +2055,51 @@ in
         url = "https://github.com/ocaml-ppx/ppx_tools_versioned/archive/5.4.0.tar.gz";
       };
       version = "5.4.0";
+    };
+    ppx_yojson_conv = 
+    {
+      opamInputs = 
+      {
+        base = selection.base;
+        dune = selection.dune;
+        ocaml = selection.ocaml;
+        ppx_js_style = selection.ppx_js_style;
+        ppx_yojson_conv_lib = selection.ppx_yojson_conv_lib;
+        ppxlib = selection.ppxlib;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:08awq9hgbbxvr9321m24jxlm3zixwxk9pbk8xv5asglx01dr5ydl";
+        package = "packages/ppx_yojson_conv/ppx_yojson_conv.v0.14.0";
+      };
+      pname = "ppx_yojson_conv";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "0ls6vzj7k0wrjliifqczs78anbc8b88as5w7a3wixfcs1gjfsp2w";
+        url = "https://ocaml.janestreet.com/ocaml-core/v0.14/files/ppx_yojson_conv-v0.14.0.tar.gz";
+      };
+      version = "v0.14.0";
+    };
+    ppx_yojson_conv_lib = 
+    {
+      opamInputs = 
+      {
+        dune = selection.dune;
+        ocaml = selection.ocaml;
+        yojson = selection.yojson;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:0zg2d8aiflyjs2pcvg509c47gg6d64rk010pflszp19dw9zp1hha";
+        package = "packages/ppx_yojson_conv_lib/ppx_yojson_conv_lib.v0.14.0";
+      };
+      pname = "ppx_yojson_conv_lib";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "1f1530pvyg05zwi83iwrk3v207w316wlljikwyl9ahjh24lsja46";
+        url = "https://ocaml.janestreet.com/ocaml-core/v0.14/files/ppx_yojson_conv_lib-v0.14.0.tar.gz";
+      };
+      version = "v0.14.0";
     };
     ppxlib = 
     {
@@ -2147,6 +2281,30 @@ in
         url = "http://erratique.ch/software/rresult/releases/rresult-0.6.0.tbz";
       };
       version = "0.6.0";
+    };
+    sedlex = 
+    {
+      opamInputs = 
+      {
+        dune = selection.dune;
+        gen = selection.gen;
+        ocaml = selection.ocaml;
+        ocaml-migrate-parsetree = selection.ocaml-migrate-parsetree;
+        ppx_tools_versioned = selection.ppx_tools_versioned;
+        uchar = selection.uchar;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:1fy8vk1a9nd90cyc1491q6dcx833b4hqgxs4854cm4d9cwvmn74k";
+        package = "packages/sedlex/sedlex.2.2";
+      };
+      pname = "sedlex";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "0h88fds0i3ak5lvfrh51a1k7yp8153j63bz8jqmixkb8hp4mjm6y";
+        url = "https://github.com/ocaml-community/sedlex/archive/v2.2.tar.gz";
+      };
+      version = "2.2";
     };
     seq = 
     {

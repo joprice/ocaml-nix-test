@@ -7,6 +7,8 @@ depends: [
   "dream-encoding"
   "dream-livereload"
   "dream-serve"
+  "ppx_yojson_conv"
+  "ppx_string_interpolation"
 ]
 build: [
   ["dune" "build" "-p" "ocaml_nix"]
