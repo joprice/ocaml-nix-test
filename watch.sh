@@ -1,14 +1,12 @@
 #!/usr/bin/env bash
 
-set -x
-
 source_dirs="lib bin"
 args=${*:-"bin/main.exe"}
 cmd="dune exec ${args}"
 pidfile="pidfile"
 
 sig_handler() {
-  pid=$(<pidfile)
+  pid=$(<$pidfile)
   kill "$pid"
   exit 0
 }
@@ -25,7 +23,7 @@ restart() {
   run
 }
 
-trap sig_handler SIGINT SIGTERM SIGEXIT
+trap sig_handler SIGINT SIGTERM
 
 run
 #fswatch -0 -x -or $source_dirs)
