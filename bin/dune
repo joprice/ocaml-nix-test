@@ -1,5 +1,5 @@
 (executable
  (public_name ocaml_nix)
  (name main)
- (preprocess (pps lwt_ppx ppx_yojson_conv ppx_string_interpolation))
- (libraries dream dream-livereload dream-encoding dream-cli))
+ (preprocess (pps lwt_ppx ppx_yojson_conv ppx_string_interpolation tyxml-ppx))
+ (libraries dream dream-livereload dream-encoding dream-cli tyxml))

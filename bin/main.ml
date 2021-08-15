@@ -21,6 +21,34 @@ let counter handler request =
     failures := !failures + 1;
     raise exn
 
+let html_to_string html = Format.asprintf "%a" (Tyxml.Html.pp ()) html
+
+let ty_html_error_template debug_info suggested_response =
+  let status = Dream.status suggested_response in
+  let code = Dream.status_to_int status in
+  let reason = Dream.status_to_string status in
+  let debug_info = debug_info |> Option.value ~default:"" in
+  suggested_response
+  |> Dream.with_header "Content-Type" Dream.text_html
+  |> Dream.with_body
+       (let open Tyxml in
+       html_to_string
+         [%html
+           {|<html>
+            <head>
+            <title>page</title>
+            </head>
+  <body>
+    <h1>|}
+             [ Html.txt (Int.to_string code ^ " " ^ reason) ]
+             {|</h1>
+    <pre>|}
+             [ Html.txt debug_info ] {|</pre>
+  </body>
+</html>
+|}])
+  |> Lwt.return
+
 let html_error_template debug_info suggested_response =
   let status = Dream.status suggested_response in
   let code = Dream.status_to_int status in
@@ -55,7 +83,7 @@ let json_error_template debug_info suggested_response =
 let () =
   (* Dream_cli.run ~debug:true *)
   Dream.run ~debug:true
-    ~error_handler:(Dream.error_template html_error_template)
+    ~error_handler:(Dream.error_template ty_html_error_template)
   @@ Dream.logger
   @@ Dream_encoding.compress
   @@ Dream_livereload.inject_script ()

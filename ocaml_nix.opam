@@ -9,6 +9,7 @@ depends: [
   "dream-serve"
   "ppx_yojson_conv"
   "ppx_string_interpolation"
+  "tyxml-ppx"
 ]
 build: [
   ["dune" "build" "-p" "ocaml_nix"]

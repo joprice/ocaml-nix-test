@@ -13,8 +13,8 @@ let
         {
           owner = "ocaml";
           repo = "opam-repository";
-          rev = "402d9ad348fea371f3513c076a7e234816003926";
-          sha256 = "1fh821hbb8sl7ji96gk2hyk51n0j1494c3mz9mkdscvcpgv8rz48";
+          rev = "f4444fe0c102235637ab7994dd3dc8d931775f40";
+          sha256 = "1aqpl0nxxb286ya6faa35qidhy1hy13srbav2fw9h88ayj5wa1a3";
         };
         src = (pkgs.fetchFromGitHub) fetch;
       };
@@ -253,7 +253,7 @@ in
       };
       opamSrc = repoPath (repos.opam-repository.src) 
       {
-        hash = "sha256:0y234rr9asb5dyvva77jdnhncixvvqdmbil4q6lhdr3bbr9c6cyk";
+        hash = "sha256:08z0c35bcm72ch2n7w0b1x7xnwn2hhcky5r6vyz8hi4m9jqv6azv";
         package = "packages/camomile/camomile.1.0.2";
       };
       pname = "camomile";
@@ -1096,16 +1096,16 @@ in
       };
       opamSrc = repoPath (repos.opam-repository.src) 
       {
-        hash = "sha256:0bynxqx8waa5pbvkkz2glbmwsbfsnzvkd519z797774a0m9k4nh8";
-        package = "packages/integers/integers.0.5.0";
+        hash = "sha256:1n15jqsbgd9xp7xn68sb52m4jdw66l6rlnsza67nw0r164i2nj00";
+        package = "packages/integers/integers.0.5.1";
       };
       pname = "integers";
       src = pkgs.fetchurl 
       {
-        sha256 = "1wm1pxl5bk7r8g9qwc89cz5awdy6rpnyvnivhzc3ml32bmw6y4dh";
-        url = "https://github.com/ocamllabs/ocaml-integers/archive/0.5.0.tar.gz";
+        sha256 = "1f1nkgpqjnavyw5vqlgrgsqaqdgzp0xngs4hx97dn7glraccw27n";
+        url = "https://github.com/ocamllabs/ocaml-integers/archive/0.5.1.tar.gz";
       };
-      version = "0.5.0";
+      version = "0.5.1";
     };
     ke = 
     {
@@ -1399,7 +1399,7 @@ in
       };
       opamSrc = repoPath (repos.opam-repository.src) 
       {
-        hash = "sha256:13hy5mhzf47860lbm84nk9r48ivrjyd1hv9i56pvlqb6dcb94ffj";
+        hash = "sha256:1mcdqlg5v8xizca1mg228vfxhvlkzldls7nsipvn6b57qlab9jha";
         package = "packages/menhir/menhir.20210419";
       };
       pname = "menhir";
@@ -1419,7 +1419,7 @@ in
       };
       opamSrc = repoPath (repos.opam-repository.src) 
       {
-        hash = "sha256:0393sm6qzdffhhkx4sqfmwr6xgl8dab7ap37mfwzyjrjycxbi1k5";
+        hash = "sha256:02hwjxzc90927pp1ia03jgmkmq17a2dhpyg56kvsn6n2rlv009kg";
         package = "packages/menhirLib/menhirLib.20210419";
       };
       pname = "menhirLib";
@@ -1439,7 +1439,7 @@ in
       };
       opamSrc = repoPath (repos.opam-repository.src) 
       {
-        hash = "sha256:0ss2dh1dak5d5rqi6p6nvplrpi13y0s71fzka8l7djpj15qfcqdx";
+        hash = "sha256:03w3lp0ih6livh4bd570qlh37iaf7xywap27jdma8064lb1fmr9b";
         package = "packages/menhirSdk/menhirSdk.20210419";
       };
       pname = "menhirSdk";
@@ -1556,7 +1556,7 @@ in
       };
       opamSrc = repoPath (repos.opam-repository.src) 
       {
-        hash = "sha256:0mjn2jxrfwlrzppjnc6pg47ncm0ri6a1hn3kj2yz10rmpca25bsm";
+        hash = "sha256:1snhaf6mixmmb49gcin5wmbz4bfjz406mip4556lids8ajm22ibh";
         package = "packages/mmap/mmap.1.1.0";
       };
       pname = "mmap";
@@ -1708,7 +1708,7 @@ in
       };
       opamSrc = repoPath (repos.opam-repository.src) 
       {
-        hash = "sha256:1kn4x3i5q2sbki2xy4jl81bx3w8kxpksjrpw4x6hlydglbv0bb0z";
+        hash = "sha256:1vqprif7sf684g52pgy9qlnfpa4k0g3ky51zjd9wz3x5iwammpw2";
         package = "packages/ocaml-migrate-parsetree/ocaml-migrate-parsetree.1.8.0";
       };
       pname = "ocaml-migrate-parsetree";
@@ -1751,6 +1751,7 @@ in
         ocamlformat = selection.ocamlformat;
         ppx_string_interpolation = selection.ppx_string_interpolation;
         ppx_yojson_conv = selection.ppx_yojson_conv;
+        tyxml-ppx = selection.tyxml-ppx;
         utop = selection.utop;
       };
       opamSrc = "ocaml_nix.opam";
@@ -1765,7 +1766,7 @@ in
       };
       opamSrc = repoPath (repos.opam-repository.src) 
       {
-        hash = "sha256:0hrzb4fgz7qh7cr65j5yq6fai82fhyl6bp8s9pwcj1a2yhczbviv";
+        hash = "sha256:1r5qnrcxfypzyvjvb3zd9f66kr5ldxdl3g9rsi3pb6040krqb5w7";
         package = "packages/ocamlbuild/ocamlbuild.0.14.0";
       };
       pname = "ocamlbuild";
@@ -1843,7 +1844,7 @@ in
       };
       opamSrc = repoPath (repos.opam-repository.src) 
       {
-        hash = "sha256:052h7m04agla2gvvv7ry2akdfd8khlkp01xr4qhv6w9lkwwdbfs5";
+        hash = "sha256:08xqzlh3xp4xs613ypy9aaflyv8zfzjjgwl1bs7zbknlgp3xbng9";
         package = "packages/ocp-indent/ocp-indent.1.8.1";
       };
       pname = "ocp-indent";
@@ -2206,7 +2207,7 @@ in
       };
       opamSrc = repoPath (repos.opam-repository.src) 
       {
-        hash = "sha256:1iylcsjy7225ilcy8d0f5wz5lm0sx0xz0cnq2l8pfbyll9vxvawy";
+        hash = "sha256:0k3x6z24l4r0wbl39m85nv92lfgipvzwk066mmbm8ph4pqmc3dy9";
         package = "packages/re/re.1.9.0";
       };
       pname = "re";
@@ -2465,6 +2466,76 @@ in
         url = "https://github.com/kandu/trie/archive/1.0.0.tar.gz";
       };
       version = "1.0.0";
+    };
+    tyxml = 
+    {
+      opamInputs = 
+      {
+        dune = selection.dune;
+        ocaml = selection.ocaml;
+        re = selection.re;
+        seq = selection.seq;
+        uutf = selection.uutf;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:13cc64bmafr9vkb3favmibjcg2vdpbvj894fv8cjnbfic7ldjc58";
+        package = "packages/tyxml/tyxml.4.4.0";
+      };
+      pname = "tyxml";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "0c150h2f4c4id73ickkdqkir3jya66m6c7f5jxlp4caw9bfr8qsi";
+        url = "https://github.com/ocsigen/tyxml/releases/download/4.4.0/tyxml-4.4.0.tbz";
+      };
+      version = "4.4.0";
+    };
+    tyxml-ppx = 
+    {
+      opamInputs = 
+      {
+        dune = selection.dune;
+        markup = selection.markup;
+        ocaml = selection.ocaml;
+        ppx_tools_versioned = selection.ppx_tools_versioned;
+        tyxml = selection.tyxml;
+        tyxml-syntax = selection.tyxml-syntax;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:13h833j9mc61m1b8m9sc6swsrppf11zh7cnqpkilfc8m4kavrhxq";
+        package = "packages/tyxml-ppx/tyxml-ppx.4.4.0";
+      };
+      pname = "tyxml-ppx";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "0c150h2f4c4id73ickkdqkir3jya66m6c7f5jxlp4caw9bfr8qsi";
+        url = "https://github.com/ocsigen/tyxml/releases/download/4.4.0/tyxml-4.4.0.tbz";
+      };
+      version = "4.4.0";
+    };
+    tyxml-syntax = 
+    {
+      opamInputs = 
+      {
+        dune = selection.dune;
+        ocaml = selection.ocaml;
+        ppx_tools_versioned = selection.ppx_tools_versioned;
+        re = selection.re;
+        uutf = selection.uutf;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:15wld5f78fv5b4vz83h35axqmfp4an5359ab7fa9wy9sp5j8vny5";
+        package = "packages/tyxml-syntax/tyxml-syntax.4.4.0";
+      };
+      pname = "tyxml-syntax";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "0c150h2f4c4id73ickkdqkir3jya66m6c7f5jxlp4caw9bfr8qsi";
+        url = "https://github.com/ocsigen/tyxml/releases/download/4.4.0/tyxml-4.4.0.tbz";
+      };
+      version = "4.4.0";
     };
     uchar = 
     {
