@@ -1,21 +1,5 @@
 {}:
 let
-  pkgsBase =
-    import <nixpkgs> {
-      #overlays = [
-      #  (
-      #    self: super: {
-      #      sqlite = super.sqlite.override {
-      #        interactive = true;
-      #      };
-      #    }
-      #  )
-      #];
-    };
-  pkgs = pkgsBase // {
-    sqlite = pkgsBase.sqlite.override {
-      interactive = true;
-    };
-  };
+  pkgs = import <nixpkgs> {};
 in
 pkgs.callPackage ./nix {}

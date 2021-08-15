@@ -7,10 +7,6 @@ let
   opam2nix = import ./opam2nix.nix {
     ocamlPackagesOverride = ocamlPackages;
   };
-  sqliteInteractive = pkgs.sqlite.override {
-    inherit readline ncurses;
-    interactive = true;
-  };
   args = {
     inherit ocaml;
     selection = ./opam-selection.nix;
@@ -22,7 +18,7 @@ let
     override = {}: {
       conf-sqlite3 = super: super.overrideAttrs (
         super: {
-          buildInputs = [ sqliteInteractive ];
+          buildInputs = [ pkgs.sqliteInteractive ];
         }
       );
       ocaml_nix = super: super.overrideAttrs (
@@ -49,7 +45,8 @@ let
   selection = opam2nix.build args;
 in
 {
-  inherit opam2nix pkgs resolve;
+  inherit opam2nix pkgs resolve
+    ;
   inherit (ocamlPackages) merlin;
   inherit (selection) ocaml_nix;
 }
