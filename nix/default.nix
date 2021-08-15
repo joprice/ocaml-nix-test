@@ -7,6 +7,10 @@ let
   opam2nix = import ./opam2nix.nix {
     ocamlPackagesOverride = ocamlPackages;
   };
+  sqliteInteractive = pkgs.sqlite.override {
+    inherit readline ncurses;
+    interactive = true;
+  };
   args = {
     inherit ocaml;
     selection = ./opam-selection.nix;
@@ -16,6 +20,11 @@ let
       ojs = gen_js_api;
     };
     override = {}: {
+      conf-sqlite3 = super: super.overrideAttrs (
+        super: {
+          buildInputs = [ sqliteInteractive ];
+        }
+      );
       ocaml_nix = super: super.overrideAttrs (
         super: {
           buildInputs = (super.buildInputs or []) ++ [
@@ -31,7 +40,7 @@ let
     rev = "e887631577170df74237618d27336dc9c73f8c21";
     sha256 = "1srpl39cs3vram7p0l0vdyhjxcvg7v61j027i05yzcri91c8yrrl";
   };
-  ocamlfind = super: import ./ocamlfind { inherit pkgs super selection; };
+  #ocamlfind = super: import ./ocamlfind { inherit pkgs super selection; };
   resolve = opam2nix.resolve args [
     "ocaml_nix.opam"
     "${gen_js_api}/gen_js_api.opam"
