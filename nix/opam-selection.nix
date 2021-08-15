@@ -13,8 +13,8 @@ let
         {
           owner = "ocaml";
           repo = "opam-repository";
-          rev = "f4444fe0c102235637ab7994dd3dc8d931775f40";
-          sha256 = "1aqpl0nxxb286ya6faa35qidhy1hy13srbav2fw9h88ayj5wa1a3";
+          rev = "97d926a793f65b767284a8d64998ac51d4895499";
+          sha256 = "0mb44n66bzwvg1f53f0rjqhhw10x7y41s7pfgiq42qr9hzd3ahgj";
         };
         src = (pkgs.fetchFromGitHub) fetch;
       };
@@ -288,6 +288,28 @@ in
       };
       version = "1.6.0";
     };
+    caqti-driver-sqlite3 = 
+    {
+      opamInputs = 
+      {
+        caqti = selection.caqti;
+        dune = selection.dune;
+        ocaml = selection.ocaml;
+        sqlite3 = selection.sqlite3;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:0314b4fxhs2l17qgx2a1mmlk4a1y2i8m98dji0yqk16d6bq4kn8m";
+        package = "packages/caqti-driver-sqlite3/caqti-driver-sqlite3.1.6.0";
+      };
+      pname = "caqti-driver-sqlite3";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "0kb7phb3hbyz541nhaw3lb4ndar5gclzb30lsq83q0s70pbc1w0v";
+        url = "https://github.com/paurkedal/ocaml-caqti/releases/download/v1.6.0/caqti-v1.6.0.tbz";
+      };
+      version = "1.6.0";
+    };
     caqti-lwt = 
     {
       opamInputs = 
@@ -422,6 +444,22 @@ in
       pname = "conf-pkg-config";
       src = null;
       version = "2";
+    };
+    conf-sqlite3 = 
+    {
+      buildInputs = [ (pkgs.sqlite) ];
+      opamInputs = 
+      {
+        conf-pkg-config = selection.conf-pkg-config;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:04psqy95g63l1asw2dncgif0bzv5xb79jh60hnsqkf0vcm7pz16r";
+        package = "packages/conf-sqlite3/conf-sqlite3.1";
+      };
+      pname = "conf-sqlite3";
+      src = null;
+      version = "1";
     };
     cppo = 
     {
@@ -1743,6 +1781,7 @@ in
     {
       opamInputs = 
       {
+        caqti-driver-sqlite3 = selection.caqti-driver-sqlite3;
         dream = selection.dream;
         dream-cli = selection.dream-cli;
         dream-encoding = selection.dream-encoding;
@@ -2340,6 +2379,28 @@ in
         url = "https://ocaml.janestreet.com/ocaml-core/v0.14/files/sexplib0-v0.14.0.tar.gz";
       };
       version = "v0.14.0";
+    };
+    sqlite3 = 
+    {
+      opamInputs = 
+      {
+        conf-sqlite3 = selection.conf-sqlite3;
+        dune = selection.dune;
+        dune-configurator = selection.dune-configurator;
+        ocaml = selection.ocaml;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:1zff1f9xggph01qyzh1dwdhbcfh1fl99mw0j6iglwixlypyrg9n8";
+        package = "packages/sqlite3/sqlite3.5.0.3";
+      };
+      pname = "sqlite3";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "1nd689pyl5gifzd3cj1hiydir5xy4ckbxkg9h5hvkj198zqfzmb9";
+        url = "https://github.com/mmottl/sqlite3-ocaml/releases/download/5.0.3/sqlite3-5.0.3.tbz";
+      };
+      version = "5.0.3";
     };
     ssl = 
     {

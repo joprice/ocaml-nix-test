@@ -8,3 +8,4 @@ _opam/
 result
 .direnv
 pidfile
+db.sqlite

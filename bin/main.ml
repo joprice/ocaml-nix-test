@@ -1,5 +1,18 @@
 open Lwt.Syntax
 
+module type DB = Caqti_lwt.CONNECTION
+
+module R = Caqti_request
+module T = Caqti_type
+
+let list_comments =
+  let query =
+    R.collect T.unit T.(tup2 int string) "SELECT id, text FROM comment"
+  in
+  fun (module Db : DB) ->
+    let* comments_or_error = Db.collect_list query () in
+    Caqti_lwt.or_fail comments_or_error
+
 let successes = ref 0
 
 let failures = ref 0
@@ -92,8 +105,13 @@ let () =
   @@ counter
   (* @@ Dream.memory_sessions *)
   @@ Dream.cookie_sessions
+  @@ Dream.sql_pool "sqlite3:db.sqlite"
   @@ Dream.router
        [
+         Dream.get "/query" (fun req ->
+             let* comments = Dream.sql req list_comments in
+             comments |> List.iter (fun (_, comment) -> print_endline comment);
+             Dream.empty `OK);
          Dream.get "/slow" (fun _ ->
              let* () = Lwt_unix.sleep 0.1 in
              Dream.html
