@@ -8,6 +8,7 @@ pidfile="pidfile"
 sig_handler() {
   pid=$(<$pidfile)
   kill "$pid"
+  rm $pidfile
   exit 0
 }
 

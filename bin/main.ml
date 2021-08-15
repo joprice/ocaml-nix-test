@@ -34,18 +34,20 @@ let ty_html_error_template debug_info suggested_response =
        (let open Tyxml in
        html_to_string
          [%html
-           {|<html>
-            <head>
-            <title>page</title>
-            </head>
-  <body>
-    <h1>|}
+           {|
+    <html>
+      <head>
+        <title>page</title>
+      </head>
+      <body><h1>|}
              [ Html.txt (Int.to_string code ^ " " ^ reason) ]
              {|</h1>
-    <pre>|}
-             [ Html.txt debug_info ] {|</pre>
-  </body>
-</html>
+        <pre>|}
+             [ Html.txt debug_info ]
+             {|
+         </pre>
+      </body>
+    </html>
 |}])
   |> Lwt.return
 
