@@ -13,8 +13,8 @@ let
         {
           owner = "ocaml";
           repo = "opam-repository";
-          rev = "97d926a793f65b767284a8d64998ac51d4895499";
-          sha256 = "0mb44n66bzwvg1f53f0rjqhhw10x7y41s7pfgiq42qr9hzd3ahgj";
+          rev = "9833f103e61177492544fde3f8b69e466bba8b4b";
+          sha256 = "1y97h8rp6lhby4pgdgvaf66qzq3haq5cp26062ivbza1zqcvm13q";
         };
         src = (pkgs.fetchFromGitHub) fetch;
       };
@@ -1019,21 +1019,6 @@ in
       };
       version = "0.5.3";
     };
-    gen_js_api = 
-    {
-      opamInputs = 
-      {
-        dune = selection.dune;
-        ocaml = selection.ocaml;
-        ocaml-migrate-parsetree = selection.ocaml-migrate-parsetree;
-        ojs = selection.ojs;
-        ppxlib = selection.ppxlib;
-      };
-      opamSrc = "gen_js_api.opam";
-      pname = "gen_js_api";
-      src = self.directSrc "gen_js_api";
-      version = "1.0.7";
-    };
     graphql = 
     {
       opamInputs = 
@@ -1317,26 +1302,26 @@ in
     };
     lwt_ppx = 
     {
+      buildInputs = [ (pkgs.unzip) ];
       opamInputs = 
       {
         dune = selection.dune;
         lwt = selection.lwt;
         ocaml = selection.ocaml;
-        ocaml-migrate-parsetree = selection.ocaml-migrate-parsetree;
-        ppx_tools_versioned = selection.ppx_tools_versioned;
+        ppxlib = selection.ppxlib;
       };
       opamSrc = repoPath (repos.opam-repository.src) 
       {
-        hash = "sha256:1vyj489ib60dh5ghvg0zgf5cp1h4720bnrizsiqdh9103sl2lirw";
-        package = "packages/lwt_ppx/lwt_ppx.2.0.1";
+        hash = "sha256:0cn09x7pngyi5ncr3l5ly518nkp2mc0xqz2a19p55bim2na1klr6";
+        package = "packages/lwt_ppx/lwt_ppx.2.0.2";
       };
       pname = "lwt_ppx";
       src = pkgs.fetchurl 
       {
-        sha256 = "0cmim5s7ay72pxpc66bmxmnj5lbg5yvm0ydrpnfh3nyhlcyjphcp";
-        url = "https://github.com/ocsigen/lwt/archive/5.2.0.tar.gz";
+        sha256 = "1lv5i3znmiqx6fiq2q1lapsq1bk20bgw7h57wmk9czx9x050a5n5";
+        url = "https://github.com/ocsigen/lwt/archive/5.4.0.zip";
       };
-      version = "2.0.1";
+      version = "2.0.2";
     };
     lwt_react = 
     {
@@ -1741,21 +1726,19 @@ in
       {
         dune = selection.dune;
         ocaml = selection.ocaml;
-        ppx_derivers = selection.ppx_derivers;
-        result = selection.result;
       };
       opamSrc = repoPath (repos.opam-repository.src) 
       {
-        hash = "sha256:1vqprif7sf684g52pgy9qlnfpa4k0g3ky51zjd9wz3x5iwammpw2";
-        package = "packages/ocaml-migrate-parsetree/ocaml-migrate-parsetree.1.8.0";
+        hash = "sha256:1x28grfw31s7x31nncavcmjl6b5vnz9f0r9s86p1hhkl2l794h89";
+        package = "packages/ocaml-migrate-parsetree/ocaml-migrate-parsetree.2.2.0";
       };
       pname = "ocaml-migrate-parsetree";
       src = pkgs.fetchurl 
       {
-        sha256 = "1dcgifw2npgkjrnb1b6jvx36wydy0nk6ny3m4wgh8i0lzxvd3hmi";
-        url = "https://github.com/ocaml-ppx/ocaml-migrate-parsetree/releases/download/v1.8.0/ocaml-migrate-parsetree-v1.8.0.tbz";
+        sha256 = "188v3z09bg4gyv80c138fa3a3j2w54w5gc4r1ajw7klr70yqz9mj";
+        url = "https://github.com/ocaml-ppx/ocaml-migrate-parsetree/releases/download/v2.2.0/ocaml-migrate-parsetree-v2.2.0.tbz";
       };
-      version = "1.8.0";
+      version = "2.2.0";
     };
     ocaml-syntax-shims = 
     {
@@ -1958,18 +1941,6 @@ in
       };
       version = "0.9.0";
     };
-    ojs = 
-    {
-      opamInputs = 
-      {
-        dune = selection.dune;
-        ocaml = selection.ocaml;
-      };
-      opamSrc = "ojs.opam";
-      pname = "ojs";
-      src = self.directSrc "ojs";
-      version = "1.0.7";
-    };
     optint = 
     {
       opamInputs = 
@@ -2064,37 +2035,16 @@ in
       };
       opamSrc = repoPath (repos.opam-repository.src) 
       {
-        hash = "sha256:1w0afx2gzdfs3y9irl6nj07cmv8bz3kdj66vsr4lrpgz2sxgsnnl";
-        package = "packages/ppx_string_interpolation/ppx_string_interpolation.1.0.0";
+        hash = "sha256:11wajnhs1vz0dxvdhwx2592ylvj2lgw9j7vi6nwwr35466hz6dll";
+        package = "packages/ppx_string_interpolation/ppx_string_interpolation.1.0.1";
       };
       pname = "ppx_string_interpolation";
       src = pkgs.fetchurl 
       {
-        sha256 = "02lcjmabby7w9fn0wq65137ir521yzrvzy35vd4kmrpa704rxb3i";
-        url = "https://github.com/bloomberg/ppx_string_interpolation/archive/1.0.0.tar.gz";
+        sha256 = "1ggyisnkqznz6qxq8cxr1qjxirzlv6h0g7k0s05qy6rrsj5bxzry";
+        url = "https://github.com/bloomberg/ppx_string_interpolation/archive/1.0.1.tar.gz";
       };
-      version = "1.0.0";
-    };
-    ppx_tools_versioned = 
-    {
-      opamInputs = 
-      {
-        dune = selection.dune;
-        ocaml = selection.ocaml;
-        ocaml-migrate-parsetree = selection.ocaml-migrate-parsetree;
-      };
-      opamSrc = repoPath (repos.opam-repository.src) 
-      {
-        hash = "sha256:03bvkrs00mb0c36qcqlzfz4ikm7lmxi0fz913l3wazynisk22rs7";
-        package = "packages/ppx_tools_versioned/ppx_tools_versioned.5.4.0";
-      };
-      pname = "ppx_tools_versioned";
-      src = pkgs.fetchurl 
-      {
-        sha256 = "0sw2676vgbsj133lgs3sl8494fhfldafzvgw4j4dnb1wqwha6pxy";
-        url = "https://github.com/ocaml-ppx/ppx_tools_versioned/archive/5.4.0.tar.gz";
-      };
-      version = "5.4.0";
+      version = "1.0.1";
     };
     ppx_yojson_conv = 
     {
@@ -2155,16 +2105,16 @@ in
       };
       opamSrc = repoPath (repos.opam-repository.src) 
       {
-        hash = "sha256:0kc4q7gq0ln6dq1c0r3as5my4rlz8khzlgwg2dqr69j4dxqv4gjd";
-        package = "packages/ppxlib/ppxlib.0.15.0";
+        hash = "sha256:1a40mqddz0aw1mac01iqdfsxip4arcc35hv3f6xz3rl2f3nbj9x0";
+        package = "packages/ppxlib/ppxlib.0.22.2";
       };
       pname = "ppxlib";
       src = pkgs.fetchurl 
       {
-        sha256 = "0c5kjgyxhck5wlnhrsh77ylkbrq3rssqhwf2bjjrka3limzhsqqb";
-        url = "https://github.com/ocaml-ppx/ppxlib/releases/download/0.15.0/ppxlib-0.15.0.tbz";
+        sha256 = "0ni2zx6g6hh2rshgk6zprs613ib0hh06z4ks9mbv2832vkms3s6h";
+        url = "https://github.com/ocaml-ppx/ppxlib/releases/download/0.22.2/ppxlib-0.22.2.tbz";
       };
-      version = "0.15.0";
+      version = "0.22.2";
     };
     prettym = 
     {
@@ -2329,22 +2279,21 @@ in
         dune = selection.dune;
         gen = selection.gen;
         ocaml = selection.ocaml;
-        ocaml-migrate-parsetree = selection.ocaml-migrate-parsetree;
-        ppx_tools_versioned = selection.ppx_tools_versioned;
+        ppxlib = selection.ppxlib;
         uchar = selection.uchar;
       };
       opamSrc = repoPath (repos.opam-repository.src) 
       {
-        hash = "sha256:1fy8vk1a9nd90cyc1491q6dcx833b4hqgxs4854cm4d9cwvmn74k";
-        package = "packages/sedlex/sedlex.2.2";
+        hash = "sha256:1mdn2xp7iwbhy26xg8a2153pfc9bvaiawb0v3zb6260z1m0hxy6p";
+        package = "packages/sedlex/sedlex.2.4";
       };
       pname = "sedlex";
       src = pkgs.fetchurl 
       {
-        sha256 = "0h88fds0i3ak5lvfrh51a1k7yp8153j63bz8jqmixkb8hp4mjm6y";
-        url = "https://github.com/ocaml-community/sedlex/archive/v2.2.tar.gz";
+        sha256 = "039kcpycyr7qv76frimijrq5fx64c8cj6b2awr8dll47xc9yrfqg";
+        url = "https://github.com/ocaml-community/sedlex/archive/v2.4.tar.gz";
       };
-      version = "2.2";
+      version = "2.4";
     };
     seq = 
     {
@@ -2540,16 +2489,16 @@ in
       };
       opamSrc = repoPath (repos.opam-repository.src) 
       {
-        hash = "sha256:13cc64bmafr9vkb3favmibjcg2vdpbvj894fv8cjnbfic7ldjc58";
-        package = "packages/tyxml/tyxml.4.4.0";
+        hash = "sha256:1lw91vsiijp4n6vgpfbws72c1v7a1b0v1fkxd7spasl8z27ljq2g";
+        package = "packages/tyxml/tyxml.4.5.0";
       };
       pname = "tyxml";
       src = pkgs.fetchurl 
       {
-        sha256 = "0c150h2f4c4id73ickkdqkir3jya66m6c7f5jxlp4caw9bfr8qsi";
-        url = "https://github.com/ocsigen/tyxml/releases/download/4.4.0/tyxml-4.4.0.tbz";
+        sha256 = "0s30f72m457c3gbdmdwbx7ls9zg806nvm83aiz9qkpglbppwr6n6";
+        url = "https://github.com/ocsigen/tyxml/releases/download/4.5.0/tyxml-4.5.0.tbz";
       };
-      version = "4.4.0";
+      version = "4.5.0";
     };
     tyxml-ppx = 
     {
@@ -2558,22 +2507,22 @@ in
         dune = selection.dune;
         markup = selection.markup;
         ocaml = selection.ocaml;
-        ppx_tools_versioned = selection.ppx_tools_versioned;
+        ppxlib = selection.ppxlib;
         tyxml = selection.tyxml;
         tyxml-syntax = selection.tyxml-syntax;
       };
       opamSrc = repoPath (repos.opam-repository.src) 
       {
-        hash = "sha256:13h833j9mc61m1b8m9sc6swsrppf11zh7cnqpkilfc8m4kavrhxq";
-        package = "packages/tyxml-ppx/tyxml-ppx.4.4.0";
+        hash = "sha256:1ghrc4hx1394d8zvw0ndy04wk3cg31cz0vm8y39z5vh6kgxv52w6";
+        package = "packages/tyxml-ppx/tyxml-ppx.4.5.0";
       };
       pname = "tyxml-ppx";
       src = pkgs.fetchurl 
       {
-        sha256 = "0c150h2f4c4id73ickkdqkir3jya66m6c7f5jxlp4caw9bfr8qsi";
-        url = "https://github.com/ocsigen/tyxml/releases/download/4.4.0/tyxml-4.4.0.tbz";
+        sha256 = "0s30f72m457c3gbdmdwbx7ls9zg806nvm83aiz9qkpglbppwr6n6";
+        url = "https://github.com/ocsigen/tyxml/releases/download/4.5.0/tyxml-4.5.0.tbz";
       };
-      version = "4.4.0";
+      version = "4.5.0";
     };
     tyxml-syntax = 
     {
@@ -2581,22 +2530,22 @@ in
       {
         dune = selection.dune;
         ocaml = selection.ocaml;
-        ppx_tools_versioned = selection.ppx_tools_versioned;
+        ppxlib = selection.ppxlib;
         re = selection.re;
         uutf = selection.uutf;
       };
       opamSrc = repoPath (repos.opam-repository.src) 
       {
-        hash = "sha256:15wld5f78fv5b4vz83h35axqmfp4an5359ab7fa9wy9sp5j8vny5";
-        package = "packages/tyxml-syntax/tyxml-syntax.4.4.0";
+        hash = "sha256:1fr7awxcfwzha68bh36crkvgrrda1adpbaxnsr8nag87283d7hql";
+        package = "packages/tyxml-syntax/tyxml-syntax.4.5.0";
       };
       pname = "tyxml-syntax";
       src = pkgs.fetchurl 
       {
-        sha256 = "0c150h2f4c4id73ickkdqkir3jya66m6c7f5jxlp4caw9bfr8qsi";
-        url = "https://github.com/ocsigen/tyxml/releases/download/4.4.0/tyxml-4.4.0.tbz";
+        sha256 = "0s30f72m457c3gbdmdwbx7ls9zg806nvm83aiz9qkpglbppwr6n6";
+        url = "https://github.com/ocsigen/tyxml/releases/download/4.5.0/tyxml-4.5.0.tbz";
       };
-      version = "4.4.0";
+      version = "4.5.0";
     };
     uchar = 
     {
