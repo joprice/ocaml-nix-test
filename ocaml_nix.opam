@@ -14,6 +14,7 @@ depends: [
   "caqti-driver-sqlite3"
   "js_of_ocaml"
   "js_of_ocaml-ppx"
+  "ppx_expect"
 ]
 build: [
   ["dune" "build" "-p" "ocaml_nix"]

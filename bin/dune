@@ -1,6 +1,15 @@
 (executable
  (public_name ocaml_nix)
  (name main)
+ (modules main schema)
  (preprocess (pps lwt_ppx ppx_yojson_conv ppx_string_interpolation tyxml-ppx))
  (flags (:standard -w -66))
- (libraries dream dream-livereload dream-encoding dream-cli tyxml caqti-driver-sqlite3))
+ (libraries handlers dream dream-livereload dream-encoding dream-cli tyxml caqti-driver-sqlite3))
+
+(library
+ (name handlers)
+ (modules Handlers)
+ (preprocess (pps lwt_ppx ppx_yojson_conv ppx_string_interpolation tyxml-ppx ppx_expect))
+ (flags (:standard -w -66-40))
+ (libraries dream dream-livereload dream-encoding dream-cli tyxml caqti-driver-sqlite3)
+ (inline_tests))
