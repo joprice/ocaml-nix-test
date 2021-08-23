@@ -2,7 +2,13 @@
 
 with pkgs;
 let
-  ocamlPackages = ocaml-ng.ocamlPackages_4_12;
+  ocamlPackages = ocaml-ng.ocamlPackages_4_12.overrideScope' (
+    self: super: {
+      ocaml = super.ocaml.override {
+        flambdaSupport = true;
+      };
+    }
+  );
   ocaml = ocamlPackages.ocaml;
   opam2nix = import ./opam2nix.nix {
     ocamlPackagesOverride = ocamlPackages;
