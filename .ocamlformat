@@ -4,4 +4,7 @@ align-variants-decl = true
 break-cases = toplevel
 # put @@ and |> on newlines
 break-infix = fit-or-vertical
+#break-fun-decl = fit-or-vertical
+#break-fun-sig = fit-or-vertical
+if-then-else = fit-or-vertical
 type-decl = sparse

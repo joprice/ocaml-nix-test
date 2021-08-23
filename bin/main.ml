@@ -36,6 +36,8 @@ let counter handler request =
 
 let html_to_string html = Format.asprintf "%a" (Tyxml.Html.pp ()) html
 
+let development = true
+
 let ty_html_error_template debug_info suggested_response =
   let status = Dream.status suggested_response in
   let code = Dream.status_to_int status in
@@ -95,6 +97,9 @@ let json_error_template debug_info suggested_response =
        |> Yojson.Safe.to_string)
   |> Lwt.return
 
+(* ppx?*)
+let default_query = "{\\n  users {\\n    name\\n    id\\n  }\\n}\\n"
+
 let () =
   (* Dream_cli.run ~debug:true *)
   Dream.run ~debug:true
@@ -108,41 +113,51 @@ let () =
   @@ Dream.sql_pool "sqlite3:db.sqlite"
   @@ Dream.router
        [
-         Dream.get "/query" (fun req ->
-             let* comments = Dream.sql req list_comments in
-             comments |> List.iter (fun (_, comment) -> print_endline comment);
-             Dream.empty `OK);
-         Dream.get "/slow" (fun _ ->
-             let* () = Lwt_unix.sleep 0.1 in
-             Dream.html
-               (Printf.sprintf "world successes: %i failures: %i" !successes
-                  !failures));
-         Dream.get "/fast" (fun _ -> Dream.html "world a");
-         Dream.get "/fail" (fun _ -> raise @@ Failure "fail");
-         Dream.get "/exn" (fun _ -> Lwt.fail @@ Failure "fail");
-         Dream.post "/echo" (fun req ->
-             let+ body = Dream.body req in
-             Dream.response
-               ~headers:[ ("Content-Type", "application/octet-stream") ]
-               body);
-         (* returns all keys stored in the session for the current user *)
-         Dream.get "sessions" (fun req ->
-             let sessions = Dream.all_session_values req in
-             let sessions =
-               sessions
-               |> ListLabels.map ~f:(fun (a, b) -> Printf.sprintf "%s:%s" a b)
-             in
-             sessions |> String.concat "," |> Dream.respond);
-         Dream.get "/user" (fun req ->
-             let user =
-               Dream.session "user" req |> Option.value ~default:"not logged in"
-             in
-             Dream.respond user);
-         Dream.post "/user/:user" (fun req ->
-             let username = Dream.param "user" req in
-             let* () = Dream.put_session "user" username req in
-             Dream.html "logged in");
-         Dream_livereload.route ();
+         Dream.scope "/api" []
+           [
+             Dream.get "/query" (fun req ->
+                 let* comments = Dream.sql req list_comments in
+                 comments
+                 |> List.iter (fun (_, comment) -> print_endline comment);
+                 Dream.empty `OK);
+             Dream.get "/slow" (fun _ ->
+                 let* () = Lwt_unix.sleep 0.1 in
+                 Dream.html
+                   (Printf.sprintf "world successes: %i failures: %i" !successes
+                      !failures));
+             Dream.get "/fast" (fun _ -> Dream.html "world a");
+             Dream.get "/fail" (fun _ -> raise @@ Failure "fail");
+             Dream.get "/exn" (fun _ -> Lwt.fail @@ Failure "fail");
+             Dream.post "/echo" (fun req ->
+                 let+ body = Dream.body req in
+                 Dream.response
+                   ~headers:[ ("Content-Type", "application/octet-stream") ]
+                   body);
+             (* returns all keys stored in the session for the current user *)
+             Dream.get "sessions" (fun req ->
+                 let sessions = Dream.all_session_values req in
+                 let sessions =
+                   sessions
+                   |> ListLabels.map ~f:(fun (a, b) ->
+                          Printf.sprintf "%s:%s" a b)
+                 in
+                 sessions |> String.concat "," |> Dream.respond);
+             Dream.get "/user" (fun req ->
+                 let user =
+                   Dream.session "user" req
+                   |> Option.value ~default:"not logged in"
+                 in
+                 Dream.respond user);
+             Dream.post "/user/:user" (fun req ->
+                 let username = Dream.param "user" req in
+                 let* () = Dream.put_session "user" username req in
+                 Dream.html "logged in");
+           ];
          Dream.get "/bad" (fun _ -> Dream.empty `Bad_Request);
+         Dream.any "graphql" (Dream.graphql Lwt.return (Schema.schema ()));
+         (if development then
+          Dream.get "/graphiql" (Dream.graphiql ~default_query "/graphql")
+         else Dream.no_route);
+         Dream_livereload.route ();
        ]
   @@ Dream.not_found
