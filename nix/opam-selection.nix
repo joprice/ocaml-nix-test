@@ -1130,6 +1130,76 @@ in
       };
       version = "0.5.1";
     };
+    js_of_ocaml = 
+    {
+      opamInputs = 
+      {
+        dune = selection.dune;
+        js_of_ocaml-compiler = selection.js_of_ocaml-compiler;
+        ocaml = selection.ocaml;
+        ppxlib = selection.ppxlib;
+        uchar = selection.uchar;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:1q0z0p1knw78yia0wg1svhr767xk5hx3ygffzh3nx254ql7mlqsa";
+        package = "packages/js_of_ocaml/js_of_ocaml.3.9.0";
+      };
+      pname = "js_of_ocaml";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "0m6b0ywswh340bsywnj1pa2agfal25x9wg0p57g4rw4s11xv3lvl";
+        url = "https://github.com/ocsigen/js_of_ocaml/releases/download/3.9.0/js_of_ocaml-3.9.0.tbz";
+      };
+      version = "3.9.0";
+    };
+    js_of_ocaml-compiler = 
+    {
+      opamInputs = 
+      {
+        cmdliner = selection.cmdliner;
+        dune = selection.dune;
+        menhir = selection.menhir;
+        ocaml = selection.ocaml;
+        ocamlfind = selection.ocamlfind or null;
+        ppxlib = selection.ppxlib;
+        yojson = selection.yojson;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:05ryg26p8sv35530gn5500z3sqv8dfw6qngkh1j4mv0nrvfp53b9";
+        package = "packages/js_of_ocaml-compiler/js_of_ocaml-compiler.3.9.1";
+      };
+      pname = "js_of_ocaml-compiler";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "0ib551kfsjlp9vr3fk36hrbq7xxyl8bj6vcn3ccr0s370bsmgpm6";
+        url = "https://github.com/ocsigen/js_of_ocaml/releases/download/3.9.1/js_of_ocaml-3.9.1.tbz";
+      };
+      version = "3.9.1";
+    };
+    js_of_ocaml-ppx = 
+    {
+      opamInputs = 
+      {
+        dune = selection.dune;
+        js_of_ocaml = selection.js_of_ocaml;
+        ocaml = selection.ocaml;
+        ppxlib = selection.ppxlib;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:0dxypkk5gk6f0kh2mf21qqcmzxzb68albcpb1mpvp4pjivfsij60";
+        package = "packages/js_of_ocaml-ppx/js_of_ocaml-ppx.3.9.0";
+      };
+      pname = "js_of_ocaml-ppx";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "0m6b0ywswh340bsywnj1pa2agfal25x9wg0p57g4rw4s11xv3lvl";
+        url = "https://github.com/ocsigen/js_of_ocaml/releases/download/3.9.0/js_of_ocaml-3.9.0.tbz";
+      };
+      version = "3.9.0";
+    };
     ke = 
     {
       opamInputs = 
@@ -1770,6 +1840,8 @@ in
         dream-encoding = selection.dream-encoding;
         dream-livereload = selection.dream-livereload;
         dream-serve = selection.dream-serve;
+        js_of_ocaml = selection.js_of_ocaml;
+        js_of_ocaml-ppx = selection.js_of_ocaml-ppx;
         ocamlformat = selection.ocamlformat;
         ocamlformat-rpc = selection.ocamlformat-rpc;
         ppx_string_interpolation = selection.ppx_string_interpolation;

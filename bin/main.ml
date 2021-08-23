@@ -38,6 +38,12 @@ let html_to_string html = Format.asprintf "%a" (Tyxml.Html.pp ()) html
 
 let development = true
 
+(* 256-bit key for secret in prod
+   "A medium-sized Web app serving 1000 fresh encrypted cookies per second should rotate keys about once a year"
+   use old_secrets for key rotation
+*)
+(* let () = print_endline @@ Dream.to_base64url (Dream.random 32) *)
+
 let ty_html_error_template debug_info suggested_response =
   let status = Dream.status suggested_response in
   let code = Dream.status_to_int status in
@@ -102,7 +108,10 @@ let default_query = "{\\n  users {\\n    name\\n    id\\n  }\\n}\\n"
 
 let () =
   (* Dream_cli.run ~debug:true *)
-  Dream.run ~debug:true
+  (*
+  this does not seem to work
+  ~https:true  *)
+  Dream.run ~debug:development ~greeting:development
     ~error_handler:(Dream.error_template ty_html_error_template)
   @@ Dream.logger
   @@ Dream_encoding.compress

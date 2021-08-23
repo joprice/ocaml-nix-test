@@ -12,6 +12,8 @@ depends: [
   "ppx_string_interpolation"
   "tyxml-ppx"
   "caqti-driver-sqlite3"
+  "js_of_ocaml"
+  "js_of_ocaml-ppx"
 ]
 build: [
   ["dune" "build" "-p" "ocaml_nix"]
