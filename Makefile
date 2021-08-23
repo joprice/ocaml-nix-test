@@ -13,5 +13,8 @@ resolve:
 init-sqlite:
 	sqlite3 db.sqlite < schema.sql
 
+sql:
+	sqlite3 db.sqlite
+
 dep-graph:
 	 nix-store -q --graph result

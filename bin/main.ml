@@ -111,6 +111,7 @@ let () =
   (* @@ Dream.memory_sessions *)
   @@ Dream.cookie_sessions
   @@ Dream.sql_pool "sqlite3:db.sqlite"
+  (* @@ Dream.sql_sessions *)
   @@ Dream.router
        [
          Dream.scope "/api" []
@@ -153,11 +154,19 @@ let () =
                  let* () = Dream.put_session "user" username req in
                  Dream.html "logged in");
            ];
+         Dream.get "/websocket" (fun _ ->
+             Dream.websocket (fun websocket ->
+                 let* () = Dream.send websocket "hey" in
+                 Dream.close_websocket websocket));
          Dream.get "/bad" (fun _ -> Dream.empty `Bad_Request);
          Dream.any "graphql" (Dream.graphql Lwt.return (Schema.schema ()));
          (if development then
-          Dream.get "/graphiql" (Dream.graphiql ~default_query "/graphql")
-         else Dream.no_route);
+            Dream.get "/graphiql" (Dream.graphiql ~default_query "/graphql")
+         else
+           Dream.no_route);
+         Dream.get "/static" (Dream.from_filesystem "static" "index.html");
+         (*Dream.static "static/index.html";*)
+         Dream.get "/static/**" @@ Dream.static "static";
          Dream_livereload.route ();
        ]
   @@ Dream.not_found

@@ -1,6 +1,7 @@
 opam-version: "2.0"
 depends: [
   "ocamlformat" {build}
+  "ocamlformat-rpc" {build}
   "utop" {build}
   "dream"
   "dream-cli"

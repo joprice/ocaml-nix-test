@@ -13,8 +13,8 @@ let
         {
           owner = "ocaml";
           repo = "opam-repository";
-          rev = "9833f103e61177492544fde3f8b69e466bba8b4b";
-          sha256 = "1y97h8rp6lhby4pgdgvaf66qzq3haq5cp26062ivbza1zqcvm13q";
+          rev = "3a6c6fae13d55acd1b3d775e32f6b15f039aea87";
+          sha256 = "0inff50mfwpbnh4cjd9r5ipai45vg9g0s74m3d4i14b04laa5gfr";
         };
         src = (pkgs.fetchFromGitHub) fetch;
       };
@@ -1771,6 +1771,7 @@ in
         dream-livereload = selection.dream-livereload;
         dream-serve = selection.dream-serve;
         ocamlformat = selection.ocamlformat;
+        ocamlformat-rpc = selection.ocamlformat-rpc;
         ppx_string_interpolation = selection.ppx_string_interpolation;
         ppx_yojson_conv = selection.ppx_yojson_conv;
         tyxml-ppx = selection.tyxml-ppx;
@@ -1847,6 +1848,64 @@ in
         package = "packages/ocamlformat/ocamlformat.0.19.0";
       };
       pname = "ocamlformat";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "0ihgwl7d489g938m1jvgx8azdgq9f5np5mzqwwya797hx2m4dz32";
+        url = "https://github.com/ocaml-ppx/ocamlformat/releases/download/0.19.0/ocamlformat-0.19.0.tbz";
+      };
+      version = "0.19.0";
+    };
+    ocamlformat-rpc = 
+    {
+      opamInputs = 
+      {
+        base = selection.base;
+        base-unix = selection.base-unix;
+        cmdliner = selection.cmdliner;
+        dune = selection.dune;
+        dune-build-info = selection.dune-build-info;
+        fix = selection.fix;
+        fpath = selection.fpath;
+        menhir = selection.menhir;
+        menhirLib = selection.menhirLib;
+        menhirSdk = selection.menhirSdk;
+        ocaml = selection.ocaml;
+        ocamlformat-rpc-lib = selection.ocamlformat-rpc-lib;
+        ocp-indent = selection.ocp-indent;
+        odoc-parser = selection.odoc-parser;
+        re = selection.re;
+        stdio = selection.stdio;
+        uuseg = selection.uuseg;
+        uutf = selection.uutf;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:02kmbgh905gr7ic717374wl5139qjm07vhi4zg3ryhf531mwxp93";
+        package = "packages/ocamlformat-rpc/ocamlformat-rpc.0.19.0";
+      };
+      pname = "ocamlformat-rpc";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "0ihgwl7d489g938m1jvgx8azdgq9f5np5mzqwwya797hx2m4dz32";
+        url = "https://github.com/ocaml-ppx/ocamlformat/releases/download/0.19.0/ocamlformat-0.19.0.tbz";
+      };
+      version = "0.19.0";
+    };
+    ocamlformat-rpc-lib = 
+    {
+      opamInputs = 
+      {
+        csexp = selection.csexp;
+        dune = selection.dune;
+        ocaml = selection.ocaml;
+        sexplib0 = selection.sexplib0;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:01g9aphkkk5am2a9j8isg8yjb237q527q6vs28wix12f5fhn1pk6";
+        package = "packages/ocamlformat-rpc-lib/ocamlformat-rpc-lib.0.19.0";
+      };
+      pname = "ocamlformat-rpc-lib";
       src = pkgs.fetchurl 
       {
         sha256 = "0ihgwl7d489g938m1jvgx8azdgq9f5np5mzqwwya797hx2m4dz32";
