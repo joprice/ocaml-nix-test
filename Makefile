@@ -18,3 +18,6 @@ sql:
 
 dep-graph:
 	 nix-store -q --graph result
+
+websocket:
+	  websocat ws://localhost:8080/websocket

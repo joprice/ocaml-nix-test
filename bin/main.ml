@@ -157,6 +157,12 @@ let () =
          Dream.get "/websocket" (fun _ ->
              Dream.websocket (fun websocket ->
                  let* () = Dream.send websocket "hey" in
+                 let* message = Dream.receive websocket in
+                 let* () =
+                   message
+                   |> Option.fold ~none:Lwt.return_unit ~some:(fun message ->
+                          Lwt_io.printf "%s\n" message)
+                 in
                  Dream.close_websocket websocket));
          Dream.get "/bad" (fun _ -> Dream.empty `Bad_Request);
          Dream.any "graphql" (Dream.graphql Lwt.return (Schema.schema ()));
