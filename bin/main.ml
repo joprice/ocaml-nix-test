@@ -99,12 +99,13 @@ let () =
          Handlers.api;
          Dream.get "/websocket" (fun _ ->
              Dream.websocket (fun websocket ->
-                 let* () = Dream.send websocket "hey" in
+                 let* () = Dream.send websocket "hey from server" in
                  let* message = Dream.receive websocket in
                  let* () =
                    message
                    |> Option.fold ~none:Lwt.return_unit ~some:(fun message ->
-                          Lwt_io.printf "%s\n" message)
+                          let* () = Lwt_io.printf "%s\n" message in
+                          Dream.send websocket message)
                  in
                  Dream.close_websocket websocket));
          Dream.get "/bad" (fun _ -> Dream.empty `Bad_Request);
@@ -115,6 +116,7 @@ let () =
            Dream.no_route);
          Dream.get "/static" (Dream.from_filesystem "static" "index.html");
          (*Dream.static "static/index.html";*)
+         Dream.get "/frontend/**" @@ Dream.static "_build/default/frontend";
          Dream.get "/static/**" @@ Dream.static "static";
          Dream_livereload.route ();
        ]
