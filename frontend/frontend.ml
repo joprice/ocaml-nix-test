@@ -3,10 +3,9 @@ open Js_of_ocaml
 let log msg : unit = Js_of_ocaml.Firebug.console##log msg
 
 let () =
-  Js_of_ocaml.Firebug.console##log (Js.string "test");
-  let host = Url.Current.host in
-  let port = Url.Current.port |> Option.value ~default:80 in
   let uri =
+    let host = Url.Current.host in
+    let port = Url.Current.port |> Option.value ~default:80 in
     Js.string ("ws://" ^ host ^ ":" ^ string_of_int port ^ "/websocket")
   in
   let websocket = new%js WebSockets.webSocket uri in
