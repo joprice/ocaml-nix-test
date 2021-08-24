@@ -96,6 +96,9 @@ let () =
   (* @@ Dream.sql_sessions *)
   @@ Dream.router
        [
+         Dream.scope "/"
+           [ Dream.origin_referer_check ]
+           [ Dream.any "/csrf" (fun _ -> Dream.html "csrf") ];
          Handlers.api;
          Dream.get "/websocket" (fun _ ->
              Dream.websocket (fun websocket ->
