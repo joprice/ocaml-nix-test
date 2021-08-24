@@ -8,7 +8,7 @@
 
 (library
  (name handlers)
- (modules Handlers)
+ (modules handlers counter)
  (preprocess (pps lwt_ppx ppx_yojson_conv ppx_string_interpolation tyxml-ppx ppx_expect))
  (flags (:standard -w -66-40))
  (libraries dream dream-livereload dream-encoding dream-cli tyxml caqti-driver-sqlite3)
