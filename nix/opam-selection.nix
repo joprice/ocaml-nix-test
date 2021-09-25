@@ -13,8 +13,8 @@ let
         {
           owner = "ocaml";
           repo = "opam-repository";
-          rev = "3a6c6fae13d55acd1b3d775e32f6b15f039aea87";
-          sha256 = "0inff50mfwpbnh4cjd9r5ipai45vg9g0s74m3d4i14b04laa5gfr";
+          rev = "3e14858c6fecb07f33e18639623932c246757fb5";
+          sha256 = "1pi5qwv5pjlbhd7dzfp52w7k85qn51hm1973a5ph5l853ih73kgg";
         };
         src = (pkgs.fetchFromGitHub) fetch;
       };
@@ -288,6 +288,28 @@ in
       };
       version = "1.6.0";
     };
+    caqti-driver-postgresql = 
+    {
+      opamInputs = 
+      {
+        caqti = selection.caqti;
+        dune = selection.dune;
+        ocaml = selection.ocaml;
+        postgresql = selection.postgresql;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:0sqwmnmgnj3szvz3wkbsr2pqnk601fx1mrjiwpg76j9cyaj6iz62";
+        package = "packages/caqti-driver-postgresql/caqti-driver-postgresql.1.6.0";
+      };
+      pname = "caqti-driver-postgresql";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "0kb7phb3hbyz541nhaw3lb4ndar5gclzb30lsq83q0s70pbc1w0v";
+        url = "https://github.com/paurkedal/ocaml-caqti/releases/download/v1.6.0/caqti-v1.6.0.tbz";
+      };
+      version = "1.6.0";
+    };
     caqti-driver-sqlite3 = 
     {
       opamInputs = 
@@ -444,6 +466,27 @@ in
       pname = "conf-pkg-config";
       src = null;
       version = "2";
+    };
+    conf-postgresql = 
+    {
+      buildInputs = [ (pkgs.libpq-dev or null) (pkgs.libpq-devel or null)
+                       (pkgs.postgresql or null)
+                       (pkgs.postgresql-dev or null)
+                       (pkgs.postgresql-devel or null)
+                       (pkgs.postgresql-libs or null)
+                       (pkgs.postgresql-server-devel or null)
+                       (pkgs.postgresql96 or null)
+                       (pkgs.postgresql96-client or null) ];
+      opamInputs = {
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:0djvyhzg20c9wl4fz7lwjwb6lgj5mq0nrvys6nkw51z7x6rlgl7g";
+        package = "packages/conf-postgresql/conf-postgresql.1";
+      };
+      pname = "conf-postgresql";
+      src = null;
+      version = "1";
     };
     conf-sqlite3 = 
     {
@@ -1806,16 +1849,16 @@ in
       };
       opamSrc = repoPath (repos.opam-repository.src) 
       {
-        hash = "sha256:1jxaxfbb6cpyfcfmrr6602vni74adqagphhqlvcyaddm9cjbmwma";
-        package = "packages/ocaml-compiler-libs/ocaml-compiler-libs.v0.12.3";
+        hash = "sha256:1blynia10j8vyj559kcvc7ic69zq6qjjn092fcsjzfw6czd8ya2c";
+        package = "packages/ocaml-compiler-libs/ocaml-compiler-libs.v0.12.4";
       };
       pname = "ocaml-compiler-libs";
       src = pkgs.fetchurl 
       {
-        sha256 = "1jg32fjr7n4933r01iqgablshagx20vgjkjh5pdbn54w8cqkah58";
-        url = "https://github.com/janestreet/ocaml-compiler-libs/releases/download/v0.12.3/ocaml-compiler-libs-v0.12.3.tbz";
+        sha256 = "0q3pl20pkx410gw9g4m26qq6dmzi9qan2dqlga6c2ifc6pnckjaf";
+        url = "https://github.com/janestreet/ocaml-compiler-libs/releases/download/v0.12.4/ocaml-compiler-libs-v0.12.4.tbz";
       };
-      version = "v0.12.3";
+      version = "v0.12.4";
     };
     ocaml-config = 
     {
@@ -1878,6 +1921,7 @@ in
     {
       opamInputs = 
       {
+        caqti-driver-postgresql = selection.caqti-driver-postgresql;
         caqti-driver-sqlite3 = selection.caqti-driver-sqlite3;
         dream = selection.dream;
         dream-cli = selection.dream-cli;
@@ -2156,6 +2200,29 @@ in
         url = "https://github.com/mirage/pecu/releases/download/v0.6/pecu-v0.6.tbz";
       };
       version = "0.6";
+    };
+    postgresql = 
+    {
+      opamInputs = 
+      {
+        base-bytes = selection.base-bytes;
+        conf-postgresql = selection.conf-postgresql;
+        dune = selection.dune;
+        dune-configurator = selection.dune-configurator;
+        ocaml = selection.ocaml;
+      };
+      opamSrc = repoPath (repos.opam-repository.src) 
+      {
+        hash = "sha256:1fchrw08f1hnljjd4glsnwa5dbsywn3x7yhl0xdf058xr1hvcl5w";
+        package = "packages/postgresql/postgresql.5.0.0";
+      };
+      pname = "postgresql";
+      src = pkgs.fetchurl 
+      {
+        sha256 = "1n7rgrh6z9jzs2wj1mjys0q0y8q7gy1v00jik631v0d4y9dl1kcw";
+        url = "https://github.com/mmottl/postgresql-ocaml/releases/download/5.0.0/postgresql-5.0.0.tbz";
+      };
+      version = "5.0.0";
     };
     ppx_assert = 
     {

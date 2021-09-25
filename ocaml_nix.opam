@@ -12,6 +12,7 @@ depends: [
   "ppx_string_interpolation"
   "tyxml-ppx"
   "caqti-driver-sqlite3"
+  "caqti-driver-postgresql"
   "js_of_ocaml"
   "js_of_ocaml-ppx"
   "ppx_expect"
