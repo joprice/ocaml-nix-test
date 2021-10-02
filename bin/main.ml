@@ -92,7 +92,7 @@ let () =
   @@ Handlers.counter
   (* @@ Dream.memory_sessions *)
   @@ Dream.cookie_sessions
-  @@ Dream.sql_pool "sqlite3:db.sqlite"
+  @@ Dream.sql_pool "postgresql://localhost:5432/test"
   (* @@ Dream.sql_sessions *)
   @@ Dream.router
        [

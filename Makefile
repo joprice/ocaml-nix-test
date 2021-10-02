@@ -11,7 +11,7 @@ resolve:
 	nix-shell -A resolve ./default.nix
 
 init-sqlite:
-	sqlite3 db.sqlite < schema.sql
+	sqlite3 db.sqlite < schema-sqlite.sql
 
 sql:
 	sqlite3 db.sqlite
@@ -21,3 +21,6 @@ dep-graph:
 
 websocket:
 	  websocat ws://localhost:8080/websocket
+
+init-postgres:
+	psql test < schema-postgres.sql

@@ -16,6 +16,7 @@ depends: [
   "js_of_ocaml"
   "js_of_ocaml-ppx"
   "ppx_expect"
+  "ppx_rapper"
 ]
 build: [
   ["dune" "build" "-p" "ocaml_nix"]

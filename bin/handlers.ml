@@ -13,6 +13,11 @@ type user = {
 }
 [@@deriving yojson]
 
+type comment = {
+  id : int;
+  text : string;
+}
+
 let list_comments =
   let query =
     R.collect T.unit T.(tup2 int string) "SELECT id, text FROM comment"
