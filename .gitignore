@@ -9,3 +9,4 @@ result
 .direnv
 pidfile
 db.sqlite
+timescale-data/
