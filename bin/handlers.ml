@@ -13,12 +13,15 @@ type user = {
 }
 [@@deriving yojson]
 
-type comment = {
-  id : int;
-  text : string;
-}
+module Comment = struct
+  type t = {
+    id : int;
+    text : string;
+  }
+  [@@deriving make, yojson]
+end
 
-let list_comments =
+let _list_comments =
   let query =
     R.collect T.unit T.(tup2 int string) "SELECT id, text FROM comment"
   in
@@ -26,13 +29,62 @@ let list_comments =
     let* comments_or_error = Db.collect_list query () in
     Caqti_lwt.or_fail comments_or_error
 
+let list_comments dbh =
+  let open Comment in
+  let* result =
+    [%rapper
+      get_many
+        {sql|
+      SELECT @int{comment.id}, @string{comment.text}
+      FROM comment
+      |sql}
+        record_out]
+      () dbh
+  in
+  Caqti_lwt.or_fail result
+
+(* >|= Rapper.load_many *)
+(*       (fst, fun { Comment.id; _ } -> id) *)
+(*       [ (snd, fun user twoots -> { user with twoots }) ] *)
+
+module ResponseBody = struct
+  type 'a t = { data : 'a list } [@@deriving make, yojson]
+
+  module Make (F : sig
+    type t
+
+    val t_of_yojson : Yojson.Safe.t -> t
+
+    val yojson_of_t : t -> Yojson.Safe.t
+  end) =
+  struct
+    type 'a u = 'a t
+
+    let u_of_yojson = t_of_yojson
+
+    let yojson_of_u = yojson_of_t
+
+    type t = F.t u [@@deriving yojson]
+  end
+end
+
+module Comments = ResponseBody.Make (Comment)
+
+(* module Comments = struct *)
+(*   type t = Comment.t ResponseBody.t [@@deriving yojson] *)
+(* end *)
+
 let api =
   Dream.scope "/api" []
     [
       Dream.get "/query" (fun req ->
           let* comments = Dream.sql req list_comments in
-          comments |> List.iter (fun (_, comment) -> print_endline comment);
-          Dream.empty `OK);
+          let json =
+            ResponseBody.{ data = comments }
+            |> Comments.yojson_of_t
+            |> Yojson.Safe.to_string
+          in
+          Dream.json json);
       Dream.get "/slow" (fun _ ->
           let* () = Lwt_unix.sleep 0.1 in
           Dream.html

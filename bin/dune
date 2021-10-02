@@ -12,7 +12,7 @@
 (library
  (name handlers)
  (modules handlers counter)
- (preprocess (pps lwt_ppx ppx_yojson_conv ppx_expect ppx_rapper))
+ (preprocess (pps lwt_ppx ppx_yojson_conv ppx_expect ppx_rapper ppx_deriving.make ppx_rapper))
  (flags (:standard -w -66-40))
- (libraries dream)
+ (libraries dream ppx_rapper_lwt)
  (inline_tests))
