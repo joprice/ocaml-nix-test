@@ -1,0 +1,2 @@
+# -T is set to disable TTY for non-interactive use cases like scripting
+docker-compose exec -T timescale psql -U test test

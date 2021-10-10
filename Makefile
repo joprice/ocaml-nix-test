@@ -23,7 +23,7 @@ websocket:
 	  websocat ws://localhost:8080/websocket
 
 init-postgres:
-	docker-compose exec -T timescale psql -U test test < schema-postgres.sql
+	docker-compose exec -T timescale psql -U test test < schema-timescale.sql
 
-psql:
-	 docker-compose exec timescale psql -U test test
+psql-repl:
+	docker-compose exec timescale psql -U test test
