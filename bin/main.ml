@@ -17,6 +17,37 @@ let development = true
 *)
 (* let () = print_endline @@ Dream.to_base64url (Dream.random 32) *)
 
+let _index_tyxml status reason debug_info =
+  let open Tyxml.Html in
+  html
+    (head (title (txt "page")) [])
+    (body
+       [
+         h1 [ txt (Int.to_string status ^ " " ^ reason) ];
+         pre [ txt debug_info ];
+       ])
+
+open Tyxml
+
+let%html index status reason debug_info =
+  {|
+    <html>
+      <head>
+        <title>page</title>
+      </head>
+      <body>
+        <h1>|}
+    [ Html.txt (Int.to_string status ^ " " ^ reason) ]
+    {|
+        </h1>
+        <pre>|}
+    [ Html.txt debug_info ]
+    {|
+         </pre>
+      </body>
+    </html>
+|}
+
 let ty_html_error_template debug_info suggested_response =
   let status = Dream.status suggested_response in
   let code = Dream.status_to_int status in
@@ -24,25 +55,7 @@ let ty_html_error_template debug_info suggested_response =
   let debug_info = debug_info |> Option.value ~default:"" in
   suggested_response
   |> Dream.with_header "Content-Type" Dream.text_html
-  |> Dream.with_body
-       (let open Tyxml in
-       html_to_string
-         [%html
-           {|
-    <html>
-      <head>
-        <title>page</title>
-      </head>
-      <body><h1>|}
-             [ Html.txt (Int.to_string code ^ " " ^ reason) ]
-             {|</h1>
-        <pre>|}
-             [ Html.txt debug_info ]
-             {|
-         </pre>
-      </body>
-    </html>
-|}])
+  |> Dream.with_body (html_to_string (index code reason debug_info))
   |> Lwt.return
 
 let html_error_template debug_info suggested_response =
